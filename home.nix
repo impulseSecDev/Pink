@@ -103,7 +103,6 @@ home.sessionVariables = {
     mpv
     nautilus
     #osc.packages.${pkgs.system}.default
-    obsidian
     pdfarranger
     pulseaudio
     ranger
