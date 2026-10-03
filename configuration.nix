@@ -86,13 +86,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-# INtel Drivers
-  services.xserver.videoDrivers = [ "intel" ];
-  services.xserver.deviceSection = ''
-    Option "DRI" "2"
-    Option "TearFree" "true"
-  '';
-
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [

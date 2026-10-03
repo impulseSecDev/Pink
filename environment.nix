@@ -13,6 +13,7 @@
 
   # Enable Desktop Environment
   services = {
+    displayManager.gdm.enable = true;
     xserver = {
       desktopManager.lxqt.enable = true;
     };
