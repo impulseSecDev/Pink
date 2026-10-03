@@ -87,7 +87,7 @@
   services.xserver.enable = true;
 
 # INtel Drivers
-  services.xserver.videoDrivers = [ "intel" ];
+  services.xserver.videoDrivers = [ "nomodeset" ];
   services.xserver.deviceSection = ''
     Option "DRI" "2"
     Option "TearFree" "true"
