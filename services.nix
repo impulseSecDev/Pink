@@ -21,4 +21,6 @@
   services.tailscale = {
     enable = true;
   };
+
+  services.fwupd.enable = true;
 }

@@ -13,6 +13,7 @@
       ./environment.nix
       ./services.nix
       ./programs.nix
+      ./virtualization.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -28,7 +29,7 @@
   };
 
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # Extra Kernel Modules - v4l2loopback
   boot.extraModulePackages = with config.boot.kernelPackages; [
@@ -75,19 +76,34 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  boot.kernelParams = [ "nomodeset" ];
+#keep nomodeset as a boot option to not get locked out
+  specialisation.safe-graphics.configuration = {
+    boot.kernelParams = [ "nomodeset" ];
+  };
+
+  services.journald.extraConfig = "SyncIntervalSec=0";
+
+  #boot.initrd.kernelModules = [ "i915" ];
+   boot.kernelParams = [
+     "modprobe.blacklist=i915"
+     "intel_idle.max_cstate=1"
+     "processor.max_cstate=1"
+     "intel_iommu=off"
+     "video=HDMI-A-1:d"
+     #"video=eDP-1:d"
+   ];
 
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
       # Required for modern Intel GPUs (Xe iGPU and ARC)
-      intel-media-driver     # VA-API (iHD) userspace
+      intel-vaapi-driver     # VA-API (iHD) userspace
       vpl-gpu-rt             # oneVPL (QSV) runtime
     ];
   };
 
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";     # Prefer the modern iHD backend
+    LIBVA_DRIVER_NAME = "i915";     # Prefer the modern iHD backend
   };
 
   # Configure keymap in X11

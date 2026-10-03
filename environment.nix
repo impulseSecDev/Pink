@@ -8,10 +8,15 @@
 
   # Enable Desktop Environment
   services = {
-    #displayManager.gddm.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
     xserver = {
-      desktopManager.lxqt.enable = true;
-      displayManager.lightdm.enable = true;
+      desktopManager = {
+        #lxqt.enable = true;
+        plasma6.enable = true;
+      };
     };
   };  
 
