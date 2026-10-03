@@ -9,21 +9,15 @@
     };
     nixvim.url = "github:nix-community/nixvim";
     flake-utils.url = "github:numtide/flake-utils";
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.1.0";
-      # Optional but recommended to limit the size of your system closure.
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nixvim, lanzaboote, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, nixvim, ... }: {
     nixosConfigurations.Pink = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
         nixvim.nixosModules.nixvim 
-        lanzaboote.nixosModules.lanzaboote
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;

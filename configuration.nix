@@ -16,19 +16,9 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.supportedFilesystems = lib.mkForce [ "vfat" "fat32" "exfat" "ext4" "btrfs" ];
-
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
-    autoGenerateKeys.enable = true;
-    autoEnrollKeys = {
-      enable = true;
-      # Automatically reboot to enroll the keys in the firmware
-      autoReboot = true;
-    };
-  };
+  boot.loader.systemd-boot.enable = true;     
+  boot.loader.systemd-boot.editor = true;    
+  boot.loader.efi.canTouchEfiVariables = true;
   
   nix.settings = {
     experimental-features = [
@@ -84,6 +74,8 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+
+  boot.kernelParams = [ "nomodeset" ];
 
   hardware.graphics = {
     enable = true;
