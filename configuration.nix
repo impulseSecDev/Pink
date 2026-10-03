@@ -45,7 +45,6 @@
     v4l2loopback
   ];
 
-  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.initrd.systemd.enable = true;
   hardware.amdgpu.initrd.enable = true;
   hardware.enableRedistributableFirmware = true;
