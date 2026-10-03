@@ -46,7 +46,7 @@
   ];
 
   boot.initrd.systemd.enable = true;
-  hardware.amdgpu.initrd.enable = true;
+  hardware.intel.initrd.enable = true;
   hardware.enableRedistributableFirmware = true;
 
 
