@@ -13,4 +13,6 @@
     ];
   };
 
+  nix.settings.trusted-users = [ "root" "alicia" ];
+
 }

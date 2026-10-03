@@ -8,7 +8,7 @@
 
   # Enable Desktop Environment
   services = {
-    displayManager.sddm.enable = true;
+    displayManager.lightdm.enable = true;
     xserver = {
       desktopManager.lxqt.enable = true;
     };
