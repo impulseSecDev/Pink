@@ -46,7 +46,6 @@
   ];
 
   boot.initrd.systemd.enable = true;
-  hardware.intel.initrd.enable = true;
   hardware.enableRedistributableFirmware = true;
 
 
